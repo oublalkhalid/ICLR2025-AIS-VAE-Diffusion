@@ -106,6 +106,13 @@ In summary, the new approach proposed in the paper significantly enhances **Anne
 By demonstrating its effectiveness on **time series data** using **Variational Autoencoders (VAEs)**, we can showcase the practical advantages of this improvement. As machine learning continues to tackle more complex and high-dimensional problems, advancements like these will help ensure that classical methods like AIS remain powerful, efficient, and relevant in modern applications.
 
 
+
+
+
+
+
+
+
 Note: please use the table of contents as defined in the front matter rather than the traditional markdown styling.
 
 ## Equations
@@ -124,6 +131,11 @@ $$
 Note that MathJax 3 is [a major re-write of MathJax](https://docs.mathjax.org/en/latest/upgrading/whats-new-3.0.html) 
 that brought a significant improvement to the loading and rendering speed, which is now 
 [on par with KaTeX](http://www.intmath.com/cg5/katex-mathjax-comparison.php).
+
+
+
+
+
 
 
 ## Images and Figures
