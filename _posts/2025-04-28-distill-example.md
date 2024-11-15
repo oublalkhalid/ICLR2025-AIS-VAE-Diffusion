@@ -1,34 +1,18 @@
 ---
 layout: distill
-title: Sample Blog Post
-description: Your blog post's abstract.
-  Please add your abstract or summary here and not in the main body of your text. 
-  Do not include math/latex or hyperlinks.
+title: How are Score-Based Diffusion and Annealed Importance Sampling used in Practice?
+Description: This blog post explores the innovations introduced in recent works that enhance AIS. Specifically, we propose using the optimal extended target distribution to minimize the variance of the marginal likelihood estimate, ultimately leading to better performance for AIS in various settings, including variational auto-encoders and synthetic benchmark distributions.
 date: 2025-04-28
 future: true
 htmlwidgets: true
 hidden: false
 
 # Anonymize when submitting
-# authors:
+# authors: 
 #   - name: Anonymous
 
-authors:
-  - name: Albert Einstein
-    url: "https://en.wikipedia.org/wiki/Albert_Einstein"
-    affiliations:
-      name: IAS, Princeton
-  - name: Boris Podolsky
-    url: "https://en.wikipedia.org/wiki/Boris_Podolsky"
-    affiliations:
-      name: IAS, Princeton
-  - name: Nathan Rosen
-    url: "https://en.wikipedia.org/wiki/Nathan_Rosen"
-    affiliations:
-      name: IAS, Princeton
-
 # must be the exact same name as your blogpost
-bibliography: 2025-04-28-distill-example.bib  
+bibliography: 2025-04-28-ais-vae-diffusion.bib  
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
