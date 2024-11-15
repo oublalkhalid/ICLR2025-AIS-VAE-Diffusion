@@ -18,6 +18,63 @@ bibliography: 2025-04-28-ais-vae-diffusion.bib
 #   - make sure that TOC names match the actual section names
 #     for hyperlinks within the post to work correctly. 
 #   - please use this format rather than manually creating a markdown table of contents.
+
+
+## Introduction
+
+Marginal likelihood estimation, also known as **evidence** in Bayesian statistics, plays a pivotal role in model selection, hyperparameter tuning, and Bayesian inference. Among the methods available, **Annealed Importance Sampling (AIS)** has stood out for its ability to provide unbiased estimates of the marginal likelihood. However, despite its success, AIS faces an important challenge: it relies on an extended target distribution that, while convenient, is suboptimal for minimizing the variance of the marginal likelihood estimate.
+
+A recent paper proposes a novel approach that improves AIS by leveraging recent advances in **score-based generative modeling (SGM)**. This improvement leads to an **optimal extended target distribution** for AIS, significantly reducing the variance of the marginal likelihood estimates. In this blog post, we’ll explore how this advancement works, explain its significance, and suggest demonstrating its effectiveness using **time series data** with **Variational Autoencoders (VAEs)**.
+
+## Understanding Annealed Importance Sampling (AIS)
+
+Before we dive into the details of the improvement, let’s first review how **Annealed Importance Sampling (AIS)** works. AIS is an approach to estimate the **marginal likelihood** in Bayesian models, particularly when the target posterior distribution is difficult to sample from directly. It works through the following steps:
+
+1. **Proposal Distribution**: AIS begins by constructing a proposal distribution using a **Markov chain**. The chain is initialized with an easy-to-sample distribution, then moves through a series of intermediate distributions that gradually transition from this initial distribution to the target posterior distribution. This process is referred to as **annealing**.
+
+2. **Importance Sampling (IS)**: At each step of the Markov chain, samples are reweighted using **importance sampling** to approximate the target distribution. While the intermediate steps provide a reasonable approximation of the target, calculating the full joint distribution over all steps is computationally expensive and impractical.
+
+3. **Extended Target Distribution**: To sidestep this issue, AIS introduces an **extended target distribution** that allows for a more manageable computation of the importance weights. This extended distribution ensures that when marginalizing over the entire chain, we retrieve the correct posterior distribution at the final step.
+
+## The Challenge: Suboptimal Extended Target Distribution
+
+While AIS has proven effective, the extended target distribution used in traditional AIS methods has been somewhat suboptimal. This inefficiency results in higher variance in the marginal likelihood estimate, which can degrade the accuracy and reliability of the estimation process.
+
+The issue lies in the fact that the extended target distribution, although convenient to compute, doesn't minimize the variance of the estimate as well as it could. As a result, AIS requires more samples to achieve an accurate estimate, leading to increased computational costs, especially for high-dimensional models.
+
+## A New Approach: Leveraging Score-Based Generative Models (SGM)
+
+In this paper, the authors propose an exciting new direction: leveraging **score-based generative models (SGM)** to improve the extended target distribution in AIS. Score-based generative models work by utilizing the gradient (or score) of the log-density of the target distribution to guide the sampling process. By integrating this idea into AIS, we can optimize the extended target distribution to **minimize the variance** in the marginal likelihood estimate.
+
+Here’s how this works in more detail:
+
+1. **Score-Based Modeling**: Instead of relying on the traditional extended target distribution, the authors propose using **differentiable models** to approximate the optimal extended target distribution. By using score-based methods, we can adjust the distribution to reduce variance without requiring a significant increase in computational cost.
+
+2. **Langevin and Hamiltonian Dynamics**: The approach also incorporates discretizations of **Langevin** and **Hamiltonian dynamics**, which are common in modern MCMC methods. These dynamics allow for more efficient sampling and are well-suited for optimization using score-based methods.
+
+3. **Differentiability**: The new procedure is differentiable, meaning it can be optimized using standard gradient-based methods. This makes it easier to integrate into existing machine learning frameworks and apply to a wide range of problems.
+
+## Demonstrating Effectiveness: Time Series Data with Variational Autoencoders (VAE)
+
+To demonstrate the effectiveness of this new approach, we propose applying it to **time series data** using a **Variational Autoencoder (VAE)**. VAEs are widely used in deep learning for generating complex data distributions, and they are particularly useful for tasks like **anomaly detection** and **forecasting** in time series.
+
+### Why Time Series Data and VAEs?
+
+Time series data, such as stock prices, weather patterns, or sensor readings, is inherently sequential and often exhibits complex dependencies over time. Estimating the marginal likelihood in models like VAEs can be challenging due to the complex posterior distributions involved.
+
+- **Marginal Likelihood Estimation in VAEs**: In VAEs, the marginal likelihood represents how well the model fits the observed data, and it's critical for model selection and hyperparameter tuning. However, calculating the marginal likelihood in VAEs is notoriously difficult, especially in high-dimensional settings.
+  
+- **Using AIS in VAEs**: AIS can be applied in VAEs to estimate the marginal likelihood by using a sequence of distributions that smoothly transition from an easy-to-sample distribution to the posterior distribution. However, traditional AIS struggles with high variance in the marginal likelihood estimate due to the suboptimal extended target distribution.
+
+- **Time Series Data**: Time series data often has rich temporal structure, and using a VAE to model such data requires efficient sampling methods to estimate the marginal likelihood accurately. AIS with the improved extended target distribution, as proposed in this paper, can be used to address these challenges, leading to better estimates with fewer samples and less computational cost.
+
+## Conclusion: A Better AIS for Real-World Applications
+
+In summary, the new approach proposed in the paper significantly enhances **Annealed Importance Sampling (AIS)** by leveraging **score-based generative models (SGM)** to optimize the extended target distribution. This leads to more accurate and efficient marginal likelihood estimation with reduced variance. 
+
+By demonstrating its effectiveness on **time series data** using **Variational Autoencoders (VAEs)**, we can showcase the practical advantages of this improvement. As machine learning continues to tackle more complex and high-dimensional problems, advancements like these will help ensure that classical methods like AIS remain powerful, efficient, and relevant in modern applications.
+
+
 toc:
   - name: Equations
   - name: Images and Figures
